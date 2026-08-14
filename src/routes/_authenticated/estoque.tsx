@@ -58,7 +58,16 @@ function Estoque() {
     },
   });
 
-  const { data: movimentacoes = [] } = useQuery({
+  type Mov = {
+    id: string;
+    created_at: string;
+    tipo: string;
+    quantidade: number;
+    motivo: string | null;
+    produtos: { nome: string } | null;
+  };
+
+  const { data: movimentacoes = [] } = useQuery<Mov[]>({
     queryKey: ["movimentacoes_estoque"],
     queryFn: async () => {
       const { data } = await supabase
@@ -66,7 +75,7 @@ function Estoque() {
         .select("*, produtos(nome)")
         .order("created_at", { ascending: false })
         .limit(20);
-      return data ?? [];
+      return (data ?? []) as unknown as Mov[];
     },
   });
 
@@ -199,15 +208,15 @@ function Estoque() {
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {movimentacoes.map((m: Record<string, unknown> & { id: string }) => (
+            {movimentacoes.map((m) => (
               <tr key={m.id}>
                 <td className="px-4 py-3">
-                  {dataBR(m.created_at as string)} {horaBR(m.created_at as string)}
+                  {dataBR(m.created_at)} {horaBR(m.created_at)}
                 </td>
                 <td className="px-4 py-3">
-                  {(m.produtos as { nome: string } | null)?.nome ?? "Produto removido"}
+                  {m.produtos?.nome ?? "Produto removido"}
                 </td>
-                <td className="px-4 py-3 capitalize">{m.tipo as string}</td>
+                <td className="px-4 py-3 capitalize">{m.tipo}</td>
                 <td
                   className={
                     Number(m.quantidade) < 0
@@ -216,9 +225,9 @@ function Estoque() {
                   }
                 >
                   {Number(m.quantidade) > 0 ? "+" : ""}
-                  {num(m.quantidade as number)}
+                  {num(m.quantidade)}
                 </td>
-                <td className="px-4 py-3 text-muted-foreground">{(m.motivo as string) ?? "-"}</td>
+                <td className="px-4 py-3 text-muted-foreground">{m.motivo ?? "-"}</td>
               </tr>
             ))}
             {movimentacoes.length === 0 && (
