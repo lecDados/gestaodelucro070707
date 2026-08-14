@@ -19,6 +19,7 @@ import { Route as AuthenticatedFornecedoresRouteImport } from './routes/_authent
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedPerdasRouteImport } from './routes/_authenticated/perdas'
 import { Route as AuthenticatedProdutosRouteImport } from './routes/_authenticated/produtos'
+import { Route as AuthenticatedRelatoriosRouteImport } from './routes/_authenticated/relatorios'
 import { Route as AuthenticatedVendaRouteImport } from './routes/_authenticated/venda'
 
 const IndexRoute = IndexRouteImport.update({
@@ -71,6 +72,11 @@ const AuthenticatedProdutosRoute = AuthenticatedProdutosRouteImport.update({
   path: '/produtos',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRelatoriosRoute = AuthenticatedRelatoriosRouteImport.update({
+  id: '/relatorios',
+  path: '/relatorios',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedVendaRoute = AuthenticatedVendaRouteImport.update({
   id: '/venda',
   path: '/venda',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/painel': typeof AuthenticatedPainelRoute
   '/perdas': typeof AuthenticatedPerdasRoute
   '/produtos': typeof AuthenticatedProdutosRoute
+  '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/venda': typeof AuthenticatedVendaRoute
 }
 export interface FileRoutesByTo {
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/painel': typeof AuthenticatedPainelRoute
   '/perdas': typeof AuthenticatedPerdasRoute
   '/produtos': typeof AuthenticatedProdutosRoute
+  '/relatorios': typeof AuthenticatedRelatoriosRoute
   '/venda': typeof AuthenticatedVendaRoute
 }
 export interface FileRoutesById {
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/perdas': typeof AuthenticatedPerdasRoute
   '/_authenticated/produtos': typeof AuthenticatedProdutosRoute
+  '/_authenticated/relatorios': typeof AuthenticatedRelatoriosRoute
   '/_authenticated/venda': typeof AuthenticatedVendaRoute
 }
 export interface FileRouteTypes {
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/painel'
     | '/perdas'
     | '/produtos'
+    | '/relatorios'
     | '/venda'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/painel'
     | '/perdas'
     | '/produtos'
+    | '/relatorios'
     | '/venda'
   id:
     | '__root__'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/_authenticated/painel'
     | '/_authenticated/perdas'
     | '/_authenticated/produtos'
+    | '/_authenticated/relatorios'
     | '/_authenticated/venda'
   fileRoutesById: FileRoutesById
 }
@@ -233,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProdutosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/relatorios': {
+      id: '/_authenticated/relatorios'
+      path: '/relatorios'
+      fullPath: '/relatorios'
+      preLoaderRoute: typeof AuthenticatedRelatoriosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/venda': {
       id: '/_authenticated/venda'
       path: '/venda'
@@ -251,6 +270,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedPerdasRoute: typeof AuthenticatedPerdasRoute
   AuthenticatedProdutosRoute: typeof AuthenticatedProdutosRoute
+  AuthenticatedRelatoriosRoute: typeof AuthenticatedRelatoriosRoute
   AuthenticatedVendaRoute: typeof AuthenticatedVendaRoute
 }
 
@@ -262,6 +282,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedPerdasRoute: AuthenticatedPerdasRoute,
   AuthenticatedProdutosRoute: AuthenticatedProdutosRoute,
+  AuthenticatedRelatoriosRoute: AuthenticatedRelatoriosRoute,
   AuthenticatedVendaRoute: AuthenticatedVendaRoute,
 }
 
