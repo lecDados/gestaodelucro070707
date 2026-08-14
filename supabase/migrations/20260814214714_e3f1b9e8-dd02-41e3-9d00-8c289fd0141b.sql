@@ -1,0 +1,1 @@
+ALTER FUNCTION public.registrar_movimentacao_estoque(UUID, TEXT, NUMERIC, TEXT) SECURITY INVOKER;
