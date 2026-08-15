@@ -1,4 +1,4 @@
-import { Link, useRouter } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import {
   Home,
   ShoppingCart,
@@ -10,10 +10,8 @@ import {
   TrendingDown,
   LineChart,
   Settings,
-  LogOut,
   Leaf,
 } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 
 const itens = [
   { to: "/painel", label: "Dashboard", icone: Home },
@@ -29,13 +27,6 @@ const itens = [
 ] as const;
 
 export function AppSidebar() {
-  const router = useRouter();
-
-  async function sair() {
-    await supabase.auth.signOut();
-    router.navigate({ to: "/auth" });
-  }
-
   return (
     <aside className="sticky top-0 flex h-screen w-64 shrink-0 flex-col bg-sidebar text-sidebar-foreground">
       <div className="flex items-center gap-3 px-5 py-6">
@@ -61,14 +52,6 @@ export function AppSidebar() {
           </Link>
         ))}
       </nav>
-
-      <button
-        onClick={sair}
-        className="m-3 flex items-center gap-3 rounded-lg px-3 py-3 text-base font-medium transition-colors hover:bg-sidebar-accent"
-      >
-        <LogOut className="size-5" />
-        Sair do sistema
-      </button>
     </aside>
   );
 }
