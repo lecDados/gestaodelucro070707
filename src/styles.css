@@ -148,3 +148,11 @@
     -webkit-font-smoothing: antialiased;
   }
 }
+#lovable-badge-cta,
+#lovable-badge-close {
+  visibility: hidden !important;
+}
+#lovable-badge-cta,
+#lovable-badge-close {
+  display: none !important;
+}
